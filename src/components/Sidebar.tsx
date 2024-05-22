@@ -1,26 +1,33 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import {Drawer, List, ListItem, ListItemText } from '@mui/material';
-import { toggleTodo } from '@src/redux/features/todolist/slice';
+import {Box, Drawer, List, ListItem, ListItemText, Typography} from '@mui/material';
 import { useAppSelector } from '@src/hooks';
 import { RootState } from '@src/redux/store';
 
-const Sidebar = () => {
-    const todos = useAppSelector((state: RootState) => state.todo.notification);
+const Receipt = () => {
+    const products = useAppSelector((state: RootState) => state.product.notification);
     const dispatch = useDispatch();
 
-    const handleToggle = (id: string) => {
-        dispatch(toggleTodo(id));
+    const handleItemClicked = (id: string) => {
+        // wellsee
+    };
+
+    const calculateTotal = () => {
+        return products.reduce((total, product) => total + (product.price * product.quantity), 0);
     };
 
     return (
         <Drawer variant="permanent" open>
-            <List style={{ width: '250px' }}>
-                {todos.map((item) => (
-                    <ListItem button key={item.id} onClick={() => handleToggle(item.id)}>
+            <Box sx={{ padding: 2 }}>
+                <Typography variant="h5">
+                    Total: $ {calculateTotal().toFixed(2)}
+                </Typography>
+            </Box>
+            <List style={{ width: '500px' }}>
+                {products.map((item) => (
+                    <ListItem button key={item.id} onClick={() => handleItemClicked(item.id)}>
                         <ListItemText
-                            primary={item.task}
-                            style={{ textDecoration: item.completed ? 'line-through' : 'none' }}
+                            primary={`${item.name} - Qty: ${item.quantity}: $ ${item.price.toFixed(2)}`}
                         />
                     </ListItem>
                 ))}
@@ -29,4 +36,4 @@ const Sidebar = () => {
     );
 };
 
-export default Sidebar;
+export default Receipt;

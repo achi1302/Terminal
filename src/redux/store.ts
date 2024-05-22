@@ -1,11 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { alertSlice, todoSlice } from './features';
+import {alertSlice, productSlice} from './features';
 // import {todoSlice} from "@redux/features/todolist";
 import { appBarSlice, activeComponentSlice } from './dashboard'
 export const store = configureStore({
     reducer: {
         alert: alertSlice.reducer,
-        todo: todoSlice.reducer,
+        product: productSlice.reducer,
         appBar: appBarSlice.reducer,
         activeComponent: activeComponentSlice.reducer
 

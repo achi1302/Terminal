@@ -4,7 +4,7 @@ import {ThemeProvider} from "@mui/material";
 import theme from './theme';
 
 import  Sidebar  from './components/Sidebar';
-import { TodoList, AlertSystem } from '@pages';
+import { ProductList, AlertSystem } from '@pages';
 import { Alerts } from '@components/features';
 import {Dashboard} from "@mui/icons-material";
 
@@ -19,7 +19,7 @@ const App: React.FC = () => {
             <Router>
                 <Routes>
                     <Route path = "/" element = { <AlertSystem/>} />
-                    <Route path = "/todolist" element = { <TodoList/> } />
+                    <Route path = "/productlist" element = { <ProductList/> } />
                 </Routes>
             </Router>
         </ThemeProvider>

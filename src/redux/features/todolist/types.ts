@@ -1,5 +1,6 @@
-export interface Todo {
+export interface Product {
     id: string;
-    task: string;
-    completed: boolean;
+    name: string;
+    price: number;
+    quantity: number;
 }

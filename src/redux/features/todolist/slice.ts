@@ -1,35 +1,30 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Todo } from './types';
+import { Product } from './types';
 import { v4 as uuidv4 } from 'uuid'; // For generating unique IDs
 
-interface TodoState {
-    notification: Todo[];
+interface ProductState {
+    notification: Product[];
 }
 
-const initialState: TodoState = {
+const initialState: ProductState = {
     notification: [],
 };
 
-const todoSlice = createSlice({
-    name: 'todo',
+const productSlice = createSlice({
+    name: 'product',
     initialState,
     reducers: {
-        addTodo: (state, action: PayloadAction<Omit<Todo, 'id'>>) => {
+        addProduct: (state, action: PayloadAction<Omit<Product, 'id'>>) => {
             const id = uuidv4(); // Generate a unique ID
-            const newTodo: Todo = { ...action.payload, id, completed: action.payload.completed ?? false };
-            state.notification.push(newTodo);
+            const newProduct: Product = { ...action.payload, id };
+            state.notification.push(newProduct);
         },
-        toggleTodo: (state, action: PayloadAction<string>) => { // action payload is the id of the todo
-            const index = state.notification.findIndex((todo) => todo.id === action.payload);
-            if (index !== -1)
-                state.notification[index].completed = !state.notification[index].completed;
-        },
-        removeTodo: (state, action: PayloadAction<string>) => { // action payload is the id of the todo
-            state.notification = state.notification.filter((todo) => todo.id !== action.payload);
+        removeProduct: (state, action: PayloadAction<string>) => {
+            state.notification = state.notification.filter((product) => product.id !== action.payload);
         },
     },
 });
 
-export const { addTodo, toggleTodo,removeTodo  } = todoSlice.actions;
-export default todoSlice.reducer;
-export { todoSlice };
+export const { addProduct, removeProduct  } = productSlice.actions;
+export default productSlice.reducer;
+export { productSlice };
